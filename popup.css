@@ -1,0 +1,188 @@
+body {
+    background-color: #f5f7f8;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 300;
+    display: block;
+    margin: 8px;
+}
+
+h1 {
+    font-size: 1.7em;
+    margin: 0;
+    font-weight: 600;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    min-width: 400px;
+    max-width: 550px;
+    margin: 0 auto;
+    --bs-gutter-x: 1.1rem;
+}
+
+.block {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 15px;
+    position: relative;
+}
+
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-group label {
+    margin-right: 10px;
+    font-size: 0.85em;
+    margin-bottom: 0.5em;
+    width: 110px;
+    flex-shrink: 0;
+}
+
+.form-group input[type='text'],
+.form-group input[type='email'],
+.form-group input[type='password'],
+.form-group select {
+    background-color: #f5f7f8;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+    flex-grow: 1;
+    width: 100%;
+}
+
+.form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #275ce0;
+    outline: none;
+    background-color: #ffffff;
+}
+
+#loginInput,
+#passwordInput {
+    font-size: 14px;
+}
+
+#resultContainer {
+    margin-top: 20px;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+    font-size: 14px;
+}
+
+#spinner {
+    margin-right: 10px;
+    display: inline-block;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    border-top: 2px solid #275ce0;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    background-color: #275ce0;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+button {
+    width: 100%;
+    color: white;
+    background-color: #275ce0;
+    border-radius: 20px;
+    font-weight: bold;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button.spinner-active {
+    position: relative;
+    padding-left: 40px;
+}
+
+button.spinner-active #spinner {
+    display: inline-block;
+    position: absolute;
+    left: 10px;
+}
+
+.form-group select,
+.form-group input {
+    transition: all 0.3s ease-in-out;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group select {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+}
+
+.form-group select option {
+    font-size: 14px;
+}
+
+#createdStoresList {
+    display: none;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+    /* position: absolute; */
+    top: 50px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#createdStoresList p {
+    margin: auto;
+    font-size: 14px;
+}

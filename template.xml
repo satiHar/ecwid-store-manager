@@ -1,0 +1,12 @@
+<template>
+
+<owner>
+	<storeConfiguration>
+		<currency></currency>
+		<officeLocation>
+			<countryCode></countryCode>
+		</officeLocation>
+	</storeConfiguration>
+</owner>
+
+</template>
