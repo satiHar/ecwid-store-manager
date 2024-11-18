@@ -143,19 +143,29 @@ document.addEventListener('DOMContentLoaded', function () {
         formData.append('key', 'ecwid___key');
         formData.append('plan', 'ECWID_SKINNY_FREE');
 
-        const templateFileUrl = chrome.runtime.getURL("template.xml");
+        if (countryCode !== 'USA' || currencyCode !== 'USD') {
+            const templateFileUrl = chrome.runtime.getURL("template.xml");
+            try {
+                const response = await fetch(templateFileUrl);
+                if (!response.ok) throw new Error('Error loading XML template');
+                let xmlContent = await response.text();
+
+                xmlContent = xmlContent.replace('<countryCode></countryCode>', `<countryCode>${countryCode}</countryCode>`);
+                xmlContent = xmlContent.replace('<currency></currency>', `<currency>${currencyCode}</currency>`);
+                const blob = new Blob([xmlContent], { type: "application/xml" });
+                formData.append("template", blob, "template.xml");
+
+            } catch (error) {
+                console.error('Failed to load template.xml', error);
+                resultContainer.textContent = 'An error occurred while processing the template XML.';
+                return;
+            }
+        }
+
         try {
-            const response = await fetch(templateFileUrl);
-            if (!response.ok) throw new Error('Error loading XML template');
-            let xmlContent = await response.text();
-
-            xmlContent = xmlContent.replace('<countryCode></countryCode>', `<countryCode>${countryCode}</countryCode>`);
-            xmlContent = xmlContent.replace('<currency></currency>', `<currency>${currencyCode}</currency>`);
-            const blob = new Blob([xmlContent], { type: "application/xml" });
-            formData.append("template", blob, "template.xml");
-
             const responseApi = await fetch(apiUrl, { method: 'POST', body: formData });
             const responseText = await responseApi.text();
+            // console.log('респонс', responseApi, apiUrl, { method: 'POST', body: formData });
 
             // Обработка ответа
             if (responseApi.status === 404) {
