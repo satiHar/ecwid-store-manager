@@ -54,6 +54,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordField = document.getElementById('passwordInput');
+        const icon = this;
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    });
+
     async function displayCreatedStores() {
         const sandboxName = await getSandboxNameFromUrl();
         chrome.storage.local.get(['sandboxData'], function (result) {
