@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function () {
     const loginInput = document.getElementById('loginInput');
     const passwordInput = document.getElementById('passwordInput');
@@ -74,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return { email, comment };
             });
 
-            storesArray.reverse(); //последние добавленные будут отображатсься сверху
+            storesArray.reverse(); // последние добавленные будут отображаться сверху
 
             storesArray.forEach(store => {
                 const { email, comment } = store;
@@ -103,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-
     async function handleInitialLoad() {
         const sandboxName = await getSandboxNameFromUrl();
         if (!sandboxName) {
@@ -112,21 +110,20 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Found sandboxName:', sandboxName);
         }
 
-        // Вставка сохранённого email в поле ввода
         // Вставка сохранённого email и пароля в поля ввода
         chrome.storage.local.get(['savedEmail', 'savedPassword'], function (result) {
             const savedEmail = result.savedEmail;
             const savedPassword = result.savedPassword;
-        
+
             if (savedEmail) {
                 loginInput.value = savedEmail;
             }
-        
+
             if (savedPassword) {
                 passwordInput.value = savedPassword;
             }
         });
-
+    }
 
     async function registerStore(email, password) {
         const sandboxName = await getSandboxNameFromUrl();
@@ -150,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
         formData.append('key', 'ecwid___key');
         formData.append('plan', 'ECWID_SKINNY_FREE');
 
+        // Проверяем страну и валюту
         if (countryCode !== 'USA' || currencyCode !== 'USD') {
             const templateFileUrl = chrome.runtime.getURL("template.xml");
             try {
@@ -169,10 +167,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        // запрос на регистрацию
         try {
             const responseApi = await fetch(apiUrl, { method: 'POST', body: formData });
             const responseText = await responseApi.text();
-            // console.log('респонс', responseApi, apiUrl, { method: 'POST', body: formData });
 
             // Обработка ответа
             if (responseApi.status === 404) {
@@ -269,9 +267,9 @@ document.addEventListener('DOMContentLoaded', function () {
         spinner.style.display = 'inline-block';
 
         try {
+            // Сохраняем email и пароль
             chrome.storage.local.set({ savedEmail: email, savedPassword: password }, function () {
-    console.log('Saved email and password:', email, password);
-});
+                console.log('Saved email and password:', email, password);
             });
 
             await registerStore(email, password);
