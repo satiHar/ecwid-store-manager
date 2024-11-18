@@ -113,13 +113,20 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Вставка сохранённого email в поле ввода
-        chrome.storage.local.get(['savedEmail'], function (result) {
+        // Вставка сохранённого email и пароля в поля ввода
+        chrome.storage.local.get(['savedEmail', 'savedPassword'], function (result) {
             const savedEmail = result.savedEmail;
+            const savedPassword = result.savedPassword;
+        
             if (savedEmail) {
                 loginInput.value = savedEmail;
             }
+        
+            if (savedPassword) {
+                passwordInput.value = savedPassword;
+            }
         });
-    }
+
 
     async function registerStore(email, password) {
         const sandboxName = await getSandboxNameFromUrl();
@@ -262,8 +269,9 @@ document.addEventListener('DOMContentLoaded', function () {
         spinner.style.display = 'inline-block';
 
         try {
-            chrome.storage.local.set({ savedEmail: email }, function () {
-                console.log('Saved email:', email);
+            chrome.storage.local.set({ savedEmail: email, savedPassword: password }, function () {
+    console.log('Saved email and password:', email, password);
+});
             });
 
             await registerStore(email, password);
