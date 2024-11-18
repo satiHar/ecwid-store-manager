@@ -14,5 +14,5 @@ Email и комментарий привязываются к конкретно
 
 Instalation:
 
-1. git clone git@github.com:satiHar/chrome-store-registration-ext.git
+1. git clone git@github.com:satiHar/ecwid-store-manager.git
 2. Add unpack extention to Chromium Extentions (enable Dev-mode first) Link is: chrome://extensions/ , arc://extensions/
