@@ -38,6 +38,7 @@ h1 {
     align-items: center;
     margin-bottom: 15px;
     width: 100%;
+    position: relative;
 }
 
 .form-group label {
@@ -46,6 +47,11 @@ h1 {
     margin-bottom: 0.5em;
     width: 110px;
     flex-shrink: 0;
+}
+
+#togglePassword {
+    cursor: pointer;
+    font-size: 18px;
 }
 
 .form-group input[type='text'],
